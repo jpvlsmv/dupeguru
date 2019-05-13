@@ -9,6 +9,16 @@ The Cocoa UI of dupeGuru is hosted in a separate repo: https://github.com/hsoft/
 
 ## Current status: Additional Maintainers Wanted (/ Note on Things in General)
 
+I've been using dupeguru for a little while, mostly for reducing the disk space I'm using for media --
+I have a habit of copying all the files off my camera card, then not deleting them (just in case my
+laptop loses the data), which gives me a couple dozen copies of IMG0042774.jpg.  And the same with
+MP3 and video files.  Plus, when trying to take pictures of kids and family, it's best to take a
+couple dozen since all but one of them will have somebody blinking or looking away or making a silly
+face.  I leave finding that one good picture til later.
+
+--Joe Moore
+
+### Comments from Previous maintainers...
 When I started contributing to dupeGuru, it was to help provide an updated Windows build for dupeGuru.  I hoped to contribute more over time and help work through some of the general issues as well.  Since Virgil Dupras left as the lead maintainer, I have not been able to devote enough time to work through as many issues as I had hoped.  Now I am going to be devoting a more consistent amount of time each month to work on dupeGuru, however I will not be able to get to all issues.  Additionally there are a few specific areas where additional help would be appreciated:
 
 - OSX maintenance
@@ -48,7 +58,7 @@ For windows instructions see the [Windows Instructions](Windows.md).
 
 ### Prerequisites
 
-* [Python 3.4+][python]
+* [Python 3.7+][python]
 * PyQt5
 
 ### make
