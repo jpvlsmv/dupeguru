@@ -26,3 +26,4 @@ matrix:
                           - python build.py
                           - tox -a --showconfig -v
                           - tox -l --showconfig -v
+                          - tox -e WINDOWS -vv
