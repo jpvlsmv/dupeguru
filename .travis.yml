@@ -24,3 +24,5 @@ matrix:
                   before_script:
                           - pip install -r requirements-windows.txt
                           - python build.py
+                          - tox -a --showconfig -v
+                          - tox -l --showconfig -v
