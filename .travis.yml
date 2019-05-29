@@ -3,6 +3,8 @@ language: python
 install: 
         - pip3 install -r requirements.txt -r requirements-extra.txt
 script: tox
+after_success:
+        - python3 package.py
 matrix:
         include:
                 - os: "linux"
