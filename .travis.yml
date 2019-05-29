@@ -28,4 +28,4 @@ matrix:
                           - tox -e WINDOWS
                   after_success:
                           - python3 package.py
-                          - powershell sign-release.ps1
+                          - powershell .\sign-release.ps1
