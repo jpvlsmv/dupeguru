@@ -5,6 +5,10 @@ REQ_MINOR_VERSION = 4
 PREFIX ?= /usr/local
 MV = mv
 COPY = cp
+CHMOD = chmod
+MKDIR = mkdir
+LINK = ln
+RM = rm
 
 ifeq ($(OS), Windows_NT)
 	BIN = Scripts
@@ -13,6 +17,9 @@ ifeq ($(OS), Windows_NT)
 	VENV_OPTIONS =
 	MV = move
 	COPY = copy
+	CHMOD = REM # no comparable command
+	LINK = REM # no comparable command
+	RM = del
 else
 	ifeq ($(shell uname -o), Msys)
 		# Window compatability via Msys2
@@ -121,30 +128,30 @@ srcpkg :
 	./scripts/srcpkg.sh
 
 install: all pyc
-	mkdir -p ${DESTDIR}${PREFIX}/share/dupeguru
+	$(MKDIR) -p ${DESTDIR}${PREFIX}/share/dupeguru
 	$(COPY) -rf ${packages} locale ${DESTDIR}${PREFIX}/share/dupeguru
 	$(COPY) -f run.py ${DESTDIR}${PREFIX}/share/dupeguru/run.py
-	chmod 755 ${DESTDIR}${PREFIX}/share/dupeguru/run.py
-	mkdir -p ${DESTDIR}${PREFIX}/bin
-	ln -sf ${PREFIX}/share/dupeguru/run.py ${DESTDIR}${PREFIX}/bin/dupeguru
-	mkdir -p ${DESTDIR}${PREFIX}/share/applications
+	$(CHMOD) 755 ${DESTDIR}${PREFIX}/share/dupeguru/run.py
+	$(MKDIR) -p ${DESTDIR}${PREFIX}/bin
+	$(LINK) -sf ${PREFIX}/share/dupeguru/run.py ${DESTDIR}${PREFIX}/bin/dupeguru
+	$(MKDIR) -p ${DESTDIR}${PREFIX}/share/applications
 	$(COPY) -f pkg/dupeguru.desktop ${DESTDIR}${PREFIX}/share/applications
-	mkdir -p ${DESTDIR}${PREFIX}/share/pixmaps
+	$(MKDIR) -p ${DESTDIR}${PREFIX}/share/pixmaps
 	$(COPY) -f images/dgse_logo_128.png ${DESTDIR}${PREFIX}/share/pixmaps/dupeguru.png
 
 installdocs: build/help
-	mkdir -p ${DESTDIR}${PREFIX}/share/dupeguru
+	$(MKDIR) -p ${DESTDIR}${PREFIX}/share/dupeguru
 	$(COPY) -rf build/help ${DESTDIR}${PREFIX}/share/dupeguru
 
 uninstall :
-	rm -rf "${DESTDIR}${PREFIX}/share/dupeguru"
-	rm -f "${DESTDIR}${PREFIX}/bin/dupeguru"
-	rm -f "${DESTDIR}${PREFIX}/share/applications/dupeguru.desktop"
-	rm -f "${DESTDIR}${PREFIX}/share/pixmaps/dupeguru.png"
+	$(RM) -rf "${DESTDIR}${PREFIX}/share/dupeguru"
+	$(RM) -f "${DESTDIR}${PREFIX}/bin/dupeguru"
+	$(RM) -f "${DESTDIR}${PREFIX}/share/applications/dupeguru.desktop"
+	$(RM) -f "${DESTDIR}${PREFIX}/share/pixmaps/dupeguru.png"
 
 clean:
-	-rm -rf build
-	-rm locale/*/LC_MESSAGES/*.mo
-	-rm core/pe/*.$(SO) qt/pe/*.$(SO)
+	-$(RM) -rf build
+	-$(RM) locale/*/LC_MESSAGES/*.mo
+	-$(RM) core/pe/*.$(SO) qt/pe/*.$(SO)
 
 .PHONY : clean srcpkg normpo mergepot modules i18n reqs run pyc install uninstall all
