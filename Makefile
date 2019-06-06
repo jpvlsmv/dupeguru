@@ -9,6 +9,7 @@ ifeq ($(OS), Windows_NT)
 	SO = *.pyd
 	NO_VENV = true
 	VENV_OPTIONS =
+	MV = move
 else
 	ifeq ($(shell uname -o), Msys)
 		# Window compatability via Msys2
@@ -18,10 +19,12 @@ else
 		BIN = Scripts
 		SO = *.pyd
 		VENV_OPTIONS =
+		MV = move
 	else
 		BIN = bin
 		SO = cpython-3$(PYTHON_VERSION_MINOR)m*.so
 		VENV_OPTIONS = --system-site-packages
+		MV = mv
 	endif
 endif
 
@@ -95,15 +98,15 @@ i18n: $(mofiles)
 
 core/pe/_block.$(SO) : core/pe/modules/block.c core/pe/modules/common.c
 	$(PYTHON) hscommon/build_ext.py $^ _block
-	mv _block.$(SO) core/pe
+	$(MV) _block.$(SO) core/pe
 
 core/pe/_cache.$(SO) : core/pe/modules/cache.c core/pe/modules/common.c
 	$(PYTHON) hscommon/build_ext.py $^ _cache
-	mv _cache.$(SO) core/pe
+	$(MV) _cache.$(SO) core/pe
 
 qt/pe/_block_qt.$(SO) : qt/pe/modules/block.c
 	$(PYTHON) hscommon/build_ext.py $^ _block_qt
-	mv _block_qt.$(SO) qt/pe
+	$(MV) _block_qt.$(SO) qt/pe
 
 modules : core/pe/_block.$(SO) core/pe/_cache.$(SO) qt/pe/_block_qt.$(SO)
 
