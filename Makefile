@@ -76,7 +76,7 @@ ifndef NO_VENV
 		echo "Creation of our virtualenv failed. If you're on Ubuntu, you probably need python3-venv."
 endif
 	@echo "Checking python for PyQt5"
-	${PYTHON} -c 'import PyQt5' >/dev/null 2>&1 
+	${PYTHON} -c 'import PyQt5'
 
 # Ensure that submodules are initialized
 $(submodules_target) :
