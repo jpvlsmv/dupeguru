@@ -4,6 +4,7 @@ PYRCC5 ?= pyrcc5
 REQ_MINOR_VERSION = 4
 PREFIX ?= /usr/local
 MV = mv
+COPY = cp
 
 ifeq ($(OS), Windows_NT)
 	BIN = Scripts
@@ -11,6 +12,7 @@ ifeq ($(OS), Windows_NT)
 	NO_VENV = true
 	VENV_OPTIONS =
 	MV = move
+	COPY = copy
 else
 	ifeq ($(shell uname -o), Msys)
 		# Window compatability via Msys2
@@ -120,19 +122,19 @@ srcpkg :
 
 install: all pyc
 	mkdir -p ${DESTDIR}${PREFIX}/share/dupeguru
-	cp -rf ${packages} locale ${DESTDIR}${PREFIX}/share/dupeguru
-	cp -f run.py ${DESTDIR}${PREFIX}/share/dupeguru/run.py
+	$(COPY) -rf ${packages} locale ${DESTDIR}${PREFIX}/share/dupeguru
+	$(COPY) -f run.py ${DESTDIR}${PREFIX}/share/dupeguru/run.py
 	chmod 755 ${DESTDIR}${PREFIX}/share/dupeguru/run.py
 	mkdir -p ${DESTDIR}${PREFIX}/bin
 	ln -sf ${PREFIX}/share/dupeguru/run.py ${DESTDIR}${PREFIX}/bin/dupeguru
 	mkdir -p ${DESTDIR}${PREFIX}/share/applications
-	cp -f pkg/dupeguru.desktop ${DESTDIR}${PREFIX}/share/applications
+	$(COPY) -f pkg/dupeguru.desktop ${DESTDIR}${PREFIX}/share/applications
 	mkdir -p ${DESTDIR}${PREFIX}/share/pixmaps
-	cp -f images/dgse_logo_128.png ${DESTDIR}${PREFIX}/share/pixmaps/dupeguru.png
+	$(COPY) -f images/dgse_logo_128.png ${DESTDIR}${PREFIX}/share/pixmaps/dupeguru.png
 
 installdocs: build/help
 	mkdir -p ${DESTDIR}${PREFIX}/share/dupeguru
-	cp -rf build/help ${DESTDIR}${PREFIX}/share/dupeguru
+	$(COPY) -rf build/help ${DESTDIR}${PREFIX}/share/dupeguru
 
 uninstall :
 	rm -rf "${DESTDIR}${PREFIX}/share/dupeguru"
