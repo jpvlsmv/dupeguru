@@ -3,6 +3,7 @@ PYTHON_VERSION_MINOR := $(shell ${PYTHON} -c "import sys; print(sys.version_info
 PYRCC5 ?= pyrcc5
 REQ_MINOR_VERSION = 4
 PREFIX ?= /usr/local
+MV = mv
 
 ifeq ($(OS), Windows_NT)
 	BIN = Scripts
@@ -19,12 +20,10 @@ else
 		BIN = Scripts
 		SO = *.pyd
 		VENV_OPTIONS =
-		MV = move
 	else
 		BIN = bin
 		SO = cpython-3$(PYTHON_VERSION_MINOR)m*.so
 		VENV_OPTIONS = --system-site-packages
-		MV = mv
 	endif
 endif
 
