@@ -4,19 +4,25 @@ PYRCC5 ?= pyrcc5
 REQ_MINOR_VERSION = 4
 PREFIX ?= /usr/local
 
-# Window compatability via Msys2 
-# - venv creates Scripts instead of bin
-# - compile generates .pyd instead of .so
-# - venv with --sytem-site-packages has issues on windows as well...
-
-ifeq ($(shell uname -o), Msys)
+ifeq ($(OS), Windows_NT)
 	BIN = Scripts
 	SO = *.pyd
-	VENV_OPTIONS = 
+	NO_VENV = true
+	VENV_OPTIONS =
 else
-	BIN = bin
-	SO = cpython-3$(PYTHON_VERSION_MINOR)m*.so
-	VENV_OPTIONS = --system-site-packages
+	ifeq ($(shell uname -o), Msys)
+		# Window compatability via Msys2
+		# - venv creates Scripts instead of bin
+		# - compile generates .pyd instead of .so
+		# - venv with --sytem-site-packages has issues on windows as well...
+		BIN = Scripts
+		SO = *.pyd
+		VENV_OPTIONS =
+	else
+		BIN = bin
+		SO = cpython-3$(PYTHON_VERSION_MINOR)m*.so
+		VENV_OPTIONS = --system-site-packages
+	endif
 endif
 
 # Set this variable if all dependencies are already met on the system. We will then avoid the
