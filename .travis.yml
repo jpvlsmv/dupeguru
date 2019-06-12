@@ -1,7 +1,5 @@
 sudo: false
 language: python
-install: 
-        - pip3 install -r requirements.txt -r requirements-extra.txt
 script: 
         - tox
 matrix:
@@ -18,12 +16,9 @@ matrix:
                 - os: "windows"
                   language: shell
                   python: "3.7"
-                  env: "PATH=/c/python37:/c/python37/Scripts:$PATH"
+                  env: 
+                        - "PATH=/c/python37:/c/python37/Scripts:$PATH"
+                        - "TOXENV=py37-windows"
                   before_install:
-                          - choco install python make
-                          - cp /c/python37/python.exe /c/python37/python3.exe
-                  before_script:
-                          - pip3 install -r requirements-windows.txt
-                          - python3 build.py
-                  script:
-                          - tox -e py37-windows
+                        - choco install python make
+                        - cp /c/python37/python.exe /c/python37/python3.exe
