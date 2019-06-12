@@ -26,4 +26,4 @@ matrix:
                           - pip3 install -r requirements-windows.txt
                           - python3 build.py
                   script:
-                          - tox -e py37-win
+                          - tox -e py37-windows
