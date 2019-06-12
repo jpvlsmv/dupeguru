@@ -2,7 +2,8 @@ sudo: false
 language: python
 install: 
         - pip3 install -r requirements.txt -r requirements-extra.txt
-script: tox
+script: 
+        - tox
 matrix:
         include:
                 - os: "linux"
@@ -25,4 +26,4 @@ matrix:
                           - pip3 install -r requirements-windows.txt
                           - python3 build.py
                   script:
-                          - tox -e WINDOWS
+                          - tox -e py37-win
