@@ -29,7 +29,10 @@ matrix:
                   before_install:
                         - choco install python make
                         - cp /c/python37/python.exe /c/python37/python3.exe
-addons:
-        artifacts:
-                paths:
-                        - build/
+deploy:
+        provider: s3
+        access_key_id: $ARTIFACTS_KEY
+        secret_access_key: $ARTIFACTS_SECRET
+        bucket: $ARTIFACTS_BUCKET
+        local_dir: build/
+        upload-dir: $TRAVIS_REPO_SLUG/$TRAVIS_JOB_NUMBER/
