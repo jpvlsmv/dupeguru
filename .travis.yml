@@ -32,9 +32,11 @@ matrix:
 deploy:
         on:
                 all_branches: true
+        skip_cleanup: true
+        local_dir: build/
+
         provider: s3
         access_key_id: $ARTIFACTS_KEY
         secret_access_key: $ARTIFACTS_SECRET
         bucket: $ARTIFACTS_BUCKET
-        local_dir: build/
         upload-dir: $TRAVIS_REPO_SLUG/$TRAVIS_JOB_NUMBER/
