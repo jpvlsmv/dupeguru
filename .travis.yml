@@ -8,6 +8,8 @@ addons:
         apt:
                 packages:
                         - fakeroot
+                        - debhelper
+                        - python3-setuptools
 matrix:
         include:
                 - os: "linux"
