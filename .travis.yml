@@ -10,6 +10,7 @@ addons:
                         - fakeroot
                         - debhelper
                         - python3-setuptools
+                        - pyqt5-dev-tools
 matrix:
         include:
                 - os: "linux"
