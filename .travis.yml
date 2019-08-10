@@ -32,7 +32,7 @@ deploy:
         secret_access_key: "$ARTIFACTS_SECRET"
         bucket: "jpvlsmv.artifacts"
         skip_cleanup: true
-        upload-dir: dupeguru
+        upload-dir: "$TRAVIS_REPO_SLUG/$TRAVIS_JOB_NUMBER"
         on:
               repo: jpvlsmv/dupeguru
               all_branches: true
