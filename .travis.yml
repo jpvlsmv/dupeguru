@@ -16,14 +16,11 @@ matrix:
                   python: "3.7"
                 - os: "windows"
                   language: shell
-                  python: "3.7"
-                  env: "PATH=/c/python37:/c/python37/Scripts:$PATH"
+                  python: "3.8"
+                  env: "PATH=/c/python38:/c/python38/Scripts:$PATH"
                   before_install:
                           - choco install python make
-                          - where python3
-                          - where python
-                          - where py
-                          - cp /c/python37/python.exe /c/python37/python3.exe
+                          - cp /c/python38/python.exe /c/python38/python3.exe
                   before_script:
                           - pip3 install -r requirements-windows.txt
                           - python3 build.py
