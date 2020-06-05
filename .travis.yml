@@ -32,3 +32,14 @@ matrix:
                           - python3 build.py
                   script:
                           - tox -e WINDOWS
+
+deploy:
+        provider: s3
+        access_key_id: "$ARTIFACTS_KEY"
+        secret_access_key: "$ARTIFACTS_SECRET"
+        bucket: "$ARTIFACTS_BUCKET"
+        skip_cleanup: true
+        upload-dir: "$TRAVIS_REPO_SLUG/$TRAVIS_JOB_NUMBER"
+        on:
+                condition: "x$ARTIFACTS_KEY" != "x"
+                all_branches: true
