@@ -26,6 +26,7 @@ class IgnoreListDialog(QDialog):
     def __init__(self, parent, model, **kwargs):
         flags = Qt.CustomizeWindowHint | Qt.WindowTitleHint | Qt.WindowSystemMenuHint
         super().__init__(parent, flags, **kwargs)
+        self.specific_actions = frozenset()
         self._setupUi()
         self.model = model
         self.model.view = self
@@ -39,6 +40,7 @@ class IgnoreListDialog(QDialog):
         self.setWindowTitle(tr("Ignore List"))
         self.resize(540, 330)
         self.verticalLayout = QVBoxLayout(self)
+        self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.tableView = QTableView()
         self.tableView.setEditTriggers(QAbstractItemView.NoEditTriggers)
         self.tableView.setSelectionMode(QAbstractItemView.ExtendedSelection)
@@ -48,6 +50,7 @@ class IgnoreListDialog(QDialog):
         self.tableView.verticalHeader().setDefaultSectionSize(18)
         self.tableView.verticalHeader().setHighlightSections(False)
         self.tableView.verticalHeader().setVisible(False)
+        self.tableView.setWordWrap(False)
         self.verticalLayout.addWidget(self.tableView)
         self.removeSelectedButton = QPushButton(tr("Remove Selected"))
         self.clearButton = QPushButton(tr("Clear"))
